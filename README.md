@@ -56,6 +56,7 @@ Guifi.net dev page successfully installed in Docker image!
 ```
 
 After that you can head to:
+- the `guifi-web` directory, where you'll find the website's source code and, specially, to the `guifi-web/sites/all/modules/guifi` directory, where you'll find the [drupal-guifi](https://github.com/guifi/drupal-guifi) module (as a Git repository)
 - guifi.net website: http://localhost:8080 with `user: webmestre` and `password: guifi`
 - phpmyadmin (database visualization): http://localhost:8000 with `user: root` and `password: admin`
 
@@ -72,8 +73,41 @@ docker-compose up
 ```
 
 ### Drupal 7
-In development
+If you want to work in the migration of the guifi.net website to Drupal 7, clone this repository inside your development directory with writing permissions:
 
+```
+git clone https://github.com/guifi/docker-drupal-guifi
+```
+
+Then enter the directory where the [docker-compose.yml](./drupal7/docker-compose.yml) file for Drupal7 is and issue the command to build the development environment:
+
+```
+cd docker-drupal-guifi/drupal7
+docker-compose up
+```
+
+The docker-compose command automates the download and installation of the guifi.net website development environment. You can check the output messages that log the different steps performed. The installation will be finished once you see:
+
+```
+Guifi.net dev page successfully installed in Docker image!
+```
+
+After that you can head to:
+- the `guifi-web` directory, where you'll find the website's source code and, specially, to the `guifi-web/sites/all/modules/guifi` directory, where you'll find the [drupal-guifi](https://github.com/guifi/drupal-guifi) module (as a Git repository)
+- guifi.net website: http://localhost:8080 with `user: webmestre` and `password: guifi`
+- phpmyadmin (database visualization): http://localhost:8000 with `user: root` and `password: admin`
+
+User `webmestre` has the Drupal user ID #1. It is mandatory to employ this user to test migrations to newer Drupal versions.
+
+In this development environment, all Drupal users registered at www.guifi.net are available locally and have the same password: `guifi`
+
+If you want to erase all the development website's content and create a new one, run the following commands from within the `docker-drupal-guifi/drupal7` directory:
+
+```
+docker-compose rm -vf
+sudo rm -rf ./guifi-web/*
+docker-compose up
+```
 ### Drupal 8
 In development
 
